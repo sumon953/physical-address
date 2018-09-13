@@ -1,0 +1,41 @@
+echo "enter size"
+read n
+echo "enter $n segment"
+
+for((i=0;i<$n;i++))
+do
+    read s[$i]
+done
+echo "enter $n limit"
+
+for((i=0;i<$n;i++))
+do           
+    read l[$i]
+done
+
+echo "enter $n burst time"
+
+for((i=0;i<$n;i++))
+do           
+    read b[$i]
+done
+echo "enter segment to findd physical address"
+read seg
+echo "read logical address for segment $seg"
+read lo
+for((i=0;i<$n;i++))
+do 
+    if((${s[$i]}==$seg))
+    then   
+	if(($lo<=${l[$i]}))
+	then
+	x=`expr ${b[$i]} + $lo`
+         echo "pysical address = $x"
+	exit
+         fi
+    fi
+done
+if [ i>$n ]
+then
+    echo "Interrupt"
+fi
